@@ -10,7 +10,6 @@ export default class Todo extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-
   };
 
   onSubmit = e => {
