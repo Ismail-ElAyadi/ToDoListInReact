@@ -3,7 +3,15 @@ import React, { Component, Fragment } from "react";
 export default class Todo extends Component {
   state = {
     element: "",
-    items: []
+    items: [],
+    proposition:{
+        courseStatus:false,
+        travailStatus:false,
+        courses:["Carottes","Fromages","Lait","Eau"],
+        travail:["Préparer remplacer pour date","Rendre remplacer pour date"]
+
+    }
+
   };
 
   /*Lorsque L'input sera modifié , la propriété Name sera égale a la valeur de l'input actuel.*/
@@ -70,6 +78,7 @@ export default class Todo extends Component {
       <Fragment>
         <div className="card my-3">
           <div className="card-header">TodoList</div>
+          <h5>Propositions<button onClick={()=>this.displayCourses()}>Courses</button></h5>
           <div className="car-body">
             {" "}
             <form onSubmit={this.onSubmit}>
