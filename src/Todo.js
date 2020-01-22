@@ -47,21 +47,34 @@ export default class Todo extends Component {
   displayCourses = () => {
     this.setState({
       proposition: {
+
         courseStatus: !this.state.proposition.courseStatus,
+        // Utilisation du Spread Operator pour séparer CHAQUE bouton
         courses: [...this.state.proposition.courses]
       }
     });
 
-    // console.log(this.state.proposition.courses)
+
+ console.log(this.state.proposition.courseStatus)
   };
+  displayTravail = () => {
+    this.setState({
+      proposition: {
 
+        travailStatus: !this.state.proposition.travailStatus,
+        travail: [...this.state.proposition.travail]
+      }
+    })
 
+  }
 
+  
   addInput = e => {
     this.setState({
       element: e
     });
   };
+
 
   /* 1. On parcours le param de la states : items 
   2. Comme on est en JSX on peut faire un return en balise HTML */
@@ -94,21 +107,40 @@ export default class Todo extends Component {
         <div className="card my-3">
           <div className="card-header">TodoList</div>
           <h5>
-            Propositions
-            <button onClick={() => this.displayCourses()}>Courses</button>
+            {/* {'\u00A0'} = &nbsp*/}
+            Thème:{'\u00A0'}
+            {/* Courses button */}
+            <button onClick={() => this.displayCourses()}>Courses</button>{'\u00A0'}
+
+            {/* Travail Button */}
+            <button onClick={() => this.displayTravail()}>Travail</button>
           </h5>
           <div className="car-body">
-            <div>
+            {/* Courses Propositions */}
+            <Fragment>
               {this.state.proposition.courseStatus ? (
                 <div>
-                  {this.state.proposition.courses.map(el => {
+                  {this.state.proposition.courses.map((el,index) => {
+                    return (
+                      <button key={index} onClick={() => this.addInput(el)}>{el}</button>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </Fragment>
+            
+            {/* Travail Propositions */}
+            <Fragment>
+              {this.state.proposition.travailStatus ? (
+                <div>
+                  {this.state.proposition.travail.map(el => {
                     return (
                       <button onClick={() => this.addInput(el)}>{el}</button>
                     );
                   })}
                 </div>
-              ) :null}
-            </div>
+              ) : null}
+            </Fragment>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="element">Chose à faire</label>
