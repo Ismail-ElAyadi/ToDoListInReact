@@ -47,7 +47,6 @@ export default class Todo extends Component {
   displayCourses = () => {
     this.setState({
       proposition: {
-
         courseStatus: !this.state.proposition.courseStatus,
         // Utilisation du Spread Operator pour séparer CHAQUE bouton
         courses: [...this.state.proposition.courses],
@@ -56,8 +55,7 @@ export default class Todo extends Component {
       }
     });
 
-
- console.log(this.state.proposition.courseStatus)
+    console.log(this.state.proposition.courseStatus);
   };
   displayTravail = () => {
     this.setState({
@@ -67,17 +65,14 @@ export default class Todo extends Component {
         travailStatus: !this.state.proposition.travailStatus,
         travail: [...this.state.proposition.travail]
       }
-    })
+    });
+  };
 
-  }
-
-  
   addInput = e => {
     this.setState({
       element: e
     });
   };
-
 
   /* 1. On parcours le param de la states : items 
   2. Comme on est en JSX on peut faire un return en balise HTML */
@@ -109,36 +104,52 @@ export default class Todo extends Component {
       <Fragment>
         <div className="card my-3">
           <div className="card-header">TodoList</div>
-          <h5>
+          <h5 className="d-flex flex-column">
             {/* {'\u00A0'} = &nbsp*/}
-            Thème:{'\u00A0'}
-            {/* Courses button */}
-            <button onClick={() => this.displayCourses()}>Courses</button>{'\u00A0'}
+            <span className="p-2 bg-dark text-white text-center mb-3">Thème:{"\u00A0"}</span>
+            <div className="d-flex justify-content-center mb-3">
+              {/* Courses button */}
+              <button
+                className="btn btn-success col-5"
+                onClick={() => this.displayCourses()}
+              >
+                Courses
+              </button>
+              {"\u00A0"}
 
-            {/* Travail Button */}
-            <button onClick={() => this.displayTravail()}>Travail</button>
+              {/* Travail Button */}
+              <button
+                className="btn btn-success col-5"
+                onClick={() => this.displayTravail()}
+              >
+                Travail
+              </button>
+            </div>
           </h5>
           <div className="car-body">
             {/* Courses Propositions */}
             <Fragment>
               {this.state.proposition.courseStatus ? (
-                <div>
-                  {this.state.proposition.courses.map((el,index) => {
+                <div >
+                  {this.state.proposition.courses.map((el, index) => {
                     return (
-                      <button key={index} onClick={() => this.addInput(el)}>{el}</button>
+                      <button className='btn btn-light border border-secondary col-3' key={index} onClick={() => this.addInput(el)}>
+                        {el}
+                      </button>
                     );
                   })}
                 </div>
               ) : null}
             </Fragment>
-            
             {/* Travail Propositions */}
             <Fragment>
               {this.state.proposition.travailStatus ? (
                 <div>
-                  {this.state.proposition.travail.map((el,index) => {
+                  {this.state.proposition.travail.map((el, index) => {
                     return (
-                      <button key={index} onClick={() => this.addInput(el)}>{el}</button>
+                      <button className='btn btn-light border border-secondary col-6' key={index} onClick={() => this.addInput(el)}>
+                        {el}
+                      </button>
                     );
                   })}
                 </div>
@@ -146,15 +157,15 @@ export default class Todo extends Component {
             </Fragment>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label htmlFor="element">Chose à faire</label>
+                <label htmlFor="element" className=" p-2 bg-dark text-white" style={{fontSize:20}} >Décrivez votre tâche:</label>
                 <input
                   type="text"
-                  className="form-control form-control-lg"
+                  className=" form-control-lg col-8"
                   name="element"
                   onChange={this.onChange}
                   value={this.state.element}
                 />
-                <button className="btn btn-primary btn-block">
+                <button className="btn btn-success btn-block mt-3">
                   Ajouter à la liste
                 </button>
               </div>
