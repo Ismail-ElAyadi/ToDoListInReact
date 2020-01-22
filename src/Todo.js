@@ -1,8 +1,55 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 
 export default class Todo extends Component {
     state = {
-        element:''
+        element:'',
+        items:[]
+    }
+
+    onChange=(e)=>{
+        this.setState({
+            [e.target.name]: e.target.value
+            
+
+        })
+        console.log({[e.target.name]: e.target.value})
+
+    }
+
+    onSubmit = (e)=> {
+        e.preventDefault();
+        this.setState({
+            element:'',
+            items: [...this.state.items,{element:this.state.element}]
+        })
+    }
+
+    renderTodo=()=> {
+
+        return this.state.items.map((item,index)=>{
+
+            return (
+                <Fragment>
+                    
+                <div className='card mb-3' key={index}>
+                    <div className='card-body'>
+                        <h4>{item.element}
+                        <i className='fas fat-times' style={{
+                            color:'red',float:'right',cursor:'pointer'
+                        }}>
+                            
+                        </i>
+                        </h4>
+
+                    </div>
+
+                </div>
+                {this.renderTodo()}
+                
+                </Fragment>
+            )
+
+        })
     }
   render() {
     return (
