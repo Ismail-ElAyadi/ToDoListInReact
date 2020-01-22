@@ -8,7 +8,7 @@ export default class Todo extends Component {
       courseStatus: false,
       travailStatus: false,
       courses: ["Carottes", "Fromages", "Lait", "Eau"],
-      travail: ["Préparer remplacer pour date", "Rendre remplacer pour date"]
+      travail: ["Préparer x pour x", "Rendre x pour x"]
     }
   };
 
@@ -50,7 +50,9 @@ export default class Todo extends Component {
 
         courseStatus: !this.state.proposition.courseStatus,
         // Utilisation du Spread Operator pour séparer CHAQUE bouton
-        courses: [...this.state.proposition.courses]
+        courses: [...this.state.proposition.courses],
+        travailStatus: false,
+        travail: [...this.state.proposition.travail]
       }
     });
 
@@ -60,7 +62,8 @@ export default class Todo extends Component {
   displayTravail = () => {
     this.setState({
       proposition: {
-
+        courseStatus: false,
+        courses: [...this.state.proposition.courses],
         travailStatus: !this.state.proposition.travailStatus,
         travail: [...this.state.proposition.travail]
       }
@@ -133,9 +136,9 @@ export default class Todo extends Component {
             <Fragment>
               {this.state.proposition.travailStatus ? (
                 <div>
-                  {this.state.proposition.travail.map(el => {
+                  {this.state.proposition.travail.map((el,index) => {
                     return (
-                      <button onClick={() => this.addInput(el)}>{el}</button>
+                      <button key={index} onClick={() => this.addInput(el)}>{el}</button>
                     );
                   })}
                 </div>
