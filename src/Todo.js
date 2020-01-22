@@ -29,7 +29,7 @@ export default class Todo extends Component {
         return this.state.items.map((item,index)=>{
 
             return (
-                <Fragment>
+
                     
                 <div className='card mb-3' key={index}>
                     <div className='card-body'>
@@ -44,15 +44,16 @@ export default class Todo extends Component {
                     </div>
 
                 </div>
-                {this.renderTodo()}
-                
-                </Fragment>
+
             )
 
         })
     }
   render() {
     return (
+      
+        <Fragment>
+              
       <div className="card my-3">
         <div className="card-header">TodoList</div>
         <div className="car-body">
@@ -74,6 +75,8 @@ export default class Todo extends Component {
           </form>{" "}
         </div>
       </div>
+      {this.renderTodo()}
+        </Fragment>
     );
   }
 }
