@@ -72,6 +72,19 @@ export default class Todo extends Component {
     });
   };
 
+  displayCourses =()=>{
+    const crsStatus = this.state.proposition.courseStatus
+
+      this.setState({
+        proposition :{
+          courseStatus: !this.state.proposition.courseStatus
+        }
+      })
+      
+      console.log(crsStatus)
+
+
+}
 
   render() {
     return (
@@ -81,6 +94,9 @@ export default class Todo extends Component {
           <h5>Propositions<button onClick={()=>this.displayCourses()}>Courses</button></h5>
           <div className="car-body">
             {" "}
+            <div>
+              {this.state.proposition.courseStatus ? (<h1>True</h1>):(<h1>False</h1>)}
+            </div>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <label htmlFor="element">Chose à faire</label>
