@@ -24,7 +24,11 @@ export default class Todo extends Component {
       items: [...this.state.items, { element: this.state.element }]
     });
   };
-
+/* 
+1. Dans le onClick nous avons mis le parametres index pour cibler la div
+2. ici on retire la div ayant cette index
+3. On renvoit le nouveau tableau dans la nouvel state
+*/
   deleteItem = (indexElement) => {
     const arr = this.state.items
     arr.splice(indexElement, 1);
