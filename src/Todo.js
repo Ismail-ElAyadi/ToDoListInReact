@@ -4,14 +4,12 @@ export default class Todo extends Component {
   state = {
     element: "",
     items: [],
-    proposition:{
-        courseStatus:false,
-        travailStatus:false,
-        courses:["Carottes","Fromages","Lait","Eau"],
-        travail:["Préparer remplacer pour date","Rendre remplacer pour date"]
-
+    proposition: {
+      courseStatus: false,
+      travailStatus: false,
+      courses: ["Carottes", "Fromages", "Lait", "Eau"],
+      travail: ["Préparer remplacer pour date", "Rendre remplacer pour date"]
     }
-
   };
 
   /*Lorsque L'input sera modifié , la propriété Name sera égale a la valeur de l'input actuel.*/
@@ -32,19 +30,38 @@ export default class Todo extends Component {
       items: [...this.state.items, { element: this.state.element }]
     });
   };
-/* 
+  /* 
 1. Dans le onClick nous avons mis le parametres index pour cibler la div
 2. ici on retire la div ayant cette index
 3. On renvoit le nouveau tableau dans la nouvel state
 */
-  deleteItem = (indexElement) => {
-    const arr = this.state.items
+  deleteItem = indexElement => {
+    const arr = this.state.items;
     arr.splice(indexElement, 1);
 
     this.setState({
-        items: arr
-    })
-  }
+      items: arr
+    });
+  };
+
+  displayCourses = () => {
+    this.setState({
+      proposition: {
+        courseStatus: !this.state.proposition.courseStatus,
+        courses: [...this.state.proposition.courses]
+      }
+    });
+
+    // console.log(this.state.proposition.courses)
+  };
+
+
+
+  addInput = e => {
+    this.setState({
+      element: e
+    });
+  };
 
   /* 1. On parcours le param de la states : items 
   2. Comme on est en JSX on peut faire un return en balise HTML */
@@ -61,9 +78,8 @@ export default class Todo extends Component {
                   color: "red",
                   float: "right",
                   cursor: "pointer"
-                  
                 }}
-                onClick ={()=>this.deleteItem(index)}
+                onClick={() => this.deleteItem(index)}
               ></i>
             </h4>
           </div>
@@ -72,42 +88,26 @@ export default class Todo extends Component {
     });
   };
 
-  displayCourses =()=>{
-    const crsStatus = this.state.proposition.courseStatus
-
-      this.setState({
-        proposition :{
-          courseStatus: !this.state.proposition.courseStatus,
-          courses:[...this.state.proposition.courses]
-        }
-      })
-      
-
-      // console.log(this.state.proposition.courses)
-
-
-}
-
   render() {
     return (
       <Fragment>
         <div className="card my-3">
           <div className="card-header">TodoList</div>
-          <h5>Propositions<button onClick={()=>this.displayCourses()}>Courses</button></h5>
+          <h5>
+            Propositions
+            <button onClick={() => this.displayCourses()}>Courses</button>
+          </h5>
           <div className="car-body">
             <div>
               {this.state.proposition.courseStatus ? (
-              <div>
-                {this.state.proposition.courses.map(el =>
-                 { return(
-                   <button>{el}</button>
-
-                  )}
-                  )}
-              </div>
-              )
-              :
-              (<h1>False</h1>)}
+                <div>
+                  {this.state.proposition.courses.map(el => {
+                    return (
+                      <button onClick={() => this.addInput(el)}>{el}</button>
+                    );
+                  })}
+                </div>
+              ) :null}
             </div>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
