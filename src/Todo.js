@@ -6,12 +6,17 @@ export default class Todo extends Component {
     items: []
   };
 
+  /*Lorsque L'input sera modifié , la propriété Name sera égale a la valeur de l'input actuel.*/
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
 
+  /* Lors du submit , on annule l'actualisation de la page avec e.preventDefault();
+& on reset l'element grace à des infos Vides
+& on insere les éléments dans dans items sans supprimer le reste grâce au spread operator : [...]
+*/
   onSubmit = e => {
     e.preventDefault();
     this.setState({
@@ -20,6 +25,8 @@ export default class Todo extends Component {
     });
   };
 
+  /* 1. On parcours le param de la states : items 
+  2. Comme on est en JSX on peut faire un return en balise HTML */
   renderTodo = () => {
     return this.state.items.map((item, index) => {
       return (
@@ -41,6 +48,8 @@ export default class Todo extends Component {
       );
     });
   };
+
+
   render() {
     return (
       <Fragment>
@@ -65,6 +74,7 @@ export default class Todo extends Component {
             </form>{" "}
           </div>
         </div>
+        {/* Comme ils faut que tout soit englobé dans une balise on ajoute Fragment */}
         {this.renderTodo()}
       </Fragment>
     );
