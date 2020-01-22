@@ -25,6 +25,15 @@ export default class Todo extends Component {
     });
   };
 
+  deleteItem = (indexElement) => {
+    const arr = this.state.items
+    arr.splice(indexElement, 1);
+
+    this.setState({
+        items: arr
+    })
+  }
+
   /* 1. On parcours le param de la states : items 
   2. Comme on est en JSX on peut faire un return en balise HTML */
   renderTodo = () => {
@@ -40,7 +49,9 @@ export default class Todo extends Component {
                   color: "red",
                   float: "right",
                   cursor: "pointer"
+                  
                 }}
+                onClick ={()=>this.deleteItem(index)}
               ></i>
             </h4>
           </div>
