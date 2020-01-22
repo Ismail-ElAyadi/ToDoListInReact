@@ -34,7 +34,7 @@ export default class Todo extends Component {
                 <div className='card mb-3' key={index}>
                     <div className='card-body'>
                         <h4>{item.element}
-                        <i className='fas fat-times' style={{
+                        <i className='fas fa-times' style={{
                             color:'red',float:'right',cursor:'pointer'
                         }}>
                             
