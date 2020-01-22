@@ -77,11 +77,13 @@ export default class Todo extends Component {
 
       this.setState({
         proposition :{
-          courseStatus: !this.state.proposition.courseStatus
+          courseStatus: !this.state.proposition.courseStatus,
+          courses:[...this.state.proposition.courses]
         }
       })
       
-      console.log(crsStatus)
+
+      // console.log(this.state.proposition.courses)
 
 
 }
@@ -93,9 +95,19 @@ export default class Todo extends Component {
           <div className="card-header">TodoList</div>
           <h5>Propositions<button onClick={()=>this.displayCourses()}>Courses</button></h5>
           <div className="car-body">
-            {" "}
             <div>
-              {this.state.proposition.courseStatus ? (<h1>True</h1>):(<h1>False</h1>)}
+              {this.state.proposition.courseStatus ? (
+              <div>
+                {this.state.proposition.courses.map(el =>
+                 { return(
+                   <button>{el}</button>
+
+                  )}
+                  )}
+              </div>
+              )
+              :
+              (<h1>False</h1>)}
             </div>
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
